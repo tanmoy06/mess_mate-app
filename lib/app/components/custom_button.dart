@@ -11,6 +11,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Widget? leadingIcon;
   final TextStyle? textStyle;
   final Color? buttonColor;
+  final Color? borderColor;
 
   const CustomElevatedButton({
     super.key,
@@ -21,11 +22,16 @@ class CustomElevatedButton extends StatelessWidget {
     this.leadingIcon,
     this.textStyle,
     this.buttonColor,
+    this.borderColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: borderColor ?? AppColors.blue),
+        borderRadius: BorderRadius.circular(8),
+      ),
       height: height,
       width: width,
       child: ElevatedButton(

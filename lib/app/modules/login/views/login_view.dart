@@ -130,13 +130,7 @@ class LoginView extends GetView<LoginController> {
                         buttonText: AppStrings.login,
                         height: 45.kh,
                         width: 100.w,
-                        onPressed: () {
-                          if (controller.validateAll()) {
-                            // proceed with login
-                          } else {
-                            // errors will show via obx in textfields
-                          }
-                        },
+                        onPressed: controller.goToNavBar,
                       ),
                     ),
                     10.kheightBox,
@@ -152,16 +146,18 @@ class LoginView extends GetView<LoginController> {
                       width: 100.w,
                       child: OutlinedButton.icon(
                         onPressed: () {},
-                        icon: Image.asset(
-                          Assets.messMateLogo,
-                          color: Colors.green,
-                          height: 20,
+                        icon: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Image.asset(Assets.googleLogo, height: 20),
                         ),
-                        label: Text(
-                          AppStrings.loginWithGoogle,
-                          style: AppTextStyles.sans500(
-                            color: AppColors.black,
-                            fontSize: 12,
+                        label: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            AppStrings.loginWithGoogle,
+                            style: AppTextStyles.sans500(
+                              color: AppColors.black,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
                         style: OutlinedButton.styleFrom(

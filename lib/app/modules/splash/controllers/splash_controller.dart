@@ -2,29 +2,18 @@ import 'package:get/get.dart';
 import 'package:mess_mate/app/routes/app_pages.dart';
 
 class SplashController extends GetxController {
-  //TODO: Implement SplashController
+  var opacity = 0.0.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
-    _navigateToNextScreen();
-  }
 
-  void _navigateToNextScreen() async {
-    await Future.delayed(Duration(seconds: 3));
-    Get.offNamed(Routes.LOGIN);
-  }
+    Future.delayed(const Duration(milliseconds: 100), () {
+      opacity.value = 1.0;
+    });
 
-  @override
-  void onReady() {
-    super.onReady();
+    Future.delayed(const Duration(seconds: 3), () {
+      Get.offAllNamed(Routes.LOGIN);
+    });
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

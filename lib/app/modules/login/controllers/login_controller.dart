@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mess_mate/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {
   late FocusNode emailFocus;
@@ -56,6 +57,10 @@ class LoginController extends GetxController {
     }
 
     return true;
+  }
+
+  void goToNavBar() {
+    Get.offNamed(Routes.NAV_BAR);
   }
 
   @override

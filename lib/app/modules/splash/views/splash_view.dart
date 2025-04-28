@@ -15,28 +15,35 @@ class SplashView extends GetView<SplashController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.blue,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Image.asset(
-              Assets.messMateLogo,
-              height: 64,
-              width: 70,
-              color: AppColors.white,
+      body: Center(
+        child: Obx(
+          () => AnimatedOpacity(
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.easeInOut,
+            opacity: controller.opacity.value,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  Assets.messMateLogo,
+                  height: 64.kh,
+                  width: 70.kw,
+                  color: AppColors.white,
+                ),
+                30.kheightBox,
+                Text(
+                  AppStrings.findYourPerfectMess,
+                  style: AppTextStyles.sans400(color: AppColors.white),
+                ),
+                Text(
+                  AppStrings.minutes,
+                  style: AppTextStyles.sans400(color: AppColors.white),
+                ),
+              ],
             ),
           ),
-          30.kheightBox,
-          Text(
-            AppStrings.findYourPerfectMess,
-            style: AppTextStyles.sans400(color: AppColors.white),
-          ),
-          Text(
-            AppStrings.minutes,
-            style: AppTextStyles.sans400(color: AppColors.white),
-          ),
-        ],
+        ),
       ),
     );
   }
