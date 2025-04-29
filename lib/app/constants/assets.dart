@@ -4,4 +4,7 @@ class Assets {
 
   static const String messMateLogo = "assets/icons/messMateLogo.png";
   static const String googleLogo = "assets/icons/google.png";
+  static const String findMess = "assets/images/findMess.json";
+  static const String bookEasily = "assets/images/bookEasily.json";
+  static const String stayComfortable = "assets/images/stayComfortable.json";
 }

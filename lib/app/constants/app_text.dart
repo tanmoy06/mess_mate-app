@@ -24,4 +24,16 @@ class AppStrings {
   static const String settings = 'Settings';
   static const String helpAndSupport = 'Help & Support';
   static const String logOut = 'Log out';
+  static const String findYourPerfectMesss = 'Find Your Perfect Mess';
+  static const String exploreMessAndPg =
+      'Explore mess and PGs near your\ncollege in seconds.';
+  static const String skip = 'Skip';
+  static const String next = 'Next';
+  static const String bookEasily = 'Book Easily';
+  static const String compareAmenitiesPricing =
+      'Compare amenities, pricing, and\nreviews before booking.';
+  static const String stayComfortable = 'Stay Comfortable';
+  static const String enjoyAHassleFreeStay =
+      'Enjoy a hassle-free stay with utilities\nand more.';
+  static const String getStarted = 'Get Started';
 }

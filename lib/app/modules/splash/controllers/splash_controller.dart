@@ -4,7 +4,9 @@ import 'package:mess_mate/app/routes/app_pages.dart';
 
 class SplashController extends GetxController {
   var opacity = 0.0.obs;
+
   final storage = GetStorage();
+
   @override
   void onInit() {
     super.onInit();
@@ -19,8 +21,12 @@ class SplashController extends GetxController {
   }
 
   void _checkLoginStatus() {
+    bool isFirstTime = storage.read('isFirstTime') ?? true;
     String? token = storage.read('accessToken');
-    if (token != null) {
+    if (isFirstTime) {
+      storage.write('isFirstTime', false);
+      Get.offAllNamed(Routes.ONBOARDING);
+    } else if (token != null) {
       Get.offAllNamed(Routes.NAV_BAR);
     } else {
       Get.offAllNamed(Routes.LOGIN);

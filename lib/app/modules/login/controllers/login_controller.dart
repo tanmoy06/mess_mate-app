@@ -81,14 +81,14 @@ class LoginController extends GetxController {
   }
 
   Future<void> login() async {
+    if (!validateAll()) {
+      return;
+    }
     if (!isTermsAnsConditionsChecked.value) {
       Get.snackbar('Terms & Conditions', 'Please check the box to continue');
       return;
     }
 
-    if (!validateAll()) {
-      return;
-    }
     isLoading.value = true;
     try {
       var response = await http.post(

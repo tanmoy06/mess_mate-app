@@ -169,7 +169,7 @@ class UserProfileView extends GetView<UserProfileController> {
                             color: AppColors.nipple,
                             size: 20,
                           ),
-                          onTap: () {},
+                          onTap: controller.logout,
                         ),
                       ),
                     ],
