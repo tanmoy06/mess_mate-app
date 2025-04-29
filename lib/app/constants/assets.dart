@@ -7,4 +7,6 @@ class Assets {
   static const String findMess = "assets/images/findMess.json";
   static const String bookEasily = "assets/images/bookEasily.json";
   static const String stayComfortable = "assets/images/stayComfortable.json";
+  static const String location = "assets/icons/location.png";
+  static const String homePageImage = "assets/images/homePageImage.png";
 }

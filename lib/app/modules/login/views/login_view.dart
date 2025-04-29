@@ -22,6 +22,21 @@ class LoginView extends GetView<LoginController> {
         }
         return Stack(
           children: [
+            SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  36.kheightBox,
+                  Image.asset(Assets.messMateLogo, height: 25, width: 25),
+                  Center(child: SizedBox(height: 10)),
+                  Text(
+                    AppStrings.loginToYourAccount,
+                    style: AppTextStyles.sans700(),
+                  ),
+                ],
+              ),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -213,22 +228,6 @@ class LoginView extends GetView<LoginController> {
                     ],
                   ),
                 ),
-              ),
-            ),
-
-            SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  36.kheightBox,
-                  Image.asset(Assets.messMateLogo, height: 25, width: 25),
-                  Center(child: SizedBox(height: 10)),
-                  Text(
-                    AppStrings.loginToYourAccount,
-                    style: AppTextStyles.sans700(),
-                  ),
-                ],
               ),
             ),
           ],

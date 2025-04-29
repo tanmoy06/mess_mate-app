@@ -36,4 +36,5 @@ class AppStrings {
   static const String enjoyAHassleFreeStay =
       'Enjoy a hassle-free stay with utilities\nand more.';
   static const String getStarted = 'Get Started';
+  static const String location = 'Location';
 }

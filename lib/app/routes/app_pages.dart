@@ -6,6 +6,8 @@ import '../modules/SavedPg/bindings/saved_pg_binding.dart';
 import '../modules/SavedPg/views/saved_pg_view.dart';
 import '../modules/UserProfile/bindings/user_profile_binding.dart';
 import '../modules/UserProfile/views/user_profile_view.dart';
+import '../modules/User_Home/bindings/user_home_binding.dart';
+import '../modules/User_Home/views/user_home_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.ONBOARDING,
       page: () => const OnboardingView(),
       binding: OnboardingBinding(),
+    ),
+    GetPage(
+      name: _Paths.USER_HOME,
+      page: () => const UserHomeView(),
+      binding: UserHomeBinding(),
     ),
   ];
 }
