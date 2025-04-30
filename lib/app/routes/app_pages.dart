@@ -18,6 +18,8 @@ import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/view_details/bindings/view_details_binding.dart';
+import '../modules/view_details/views/view_details_view.dart';
 
 part 'app_routes.dart';
 
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.USER_HOME,
       page: () => const UserHomeView(),
       binding: UserHomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.VIEW_DETAILS,
+      page: () => const ViewDetailsView(),
+      binding: ViewDetailsBinding(),
     ),
   ];
 }

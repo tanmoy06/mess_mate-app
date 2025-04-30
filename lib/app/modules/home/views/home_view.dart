@@ -16,7 +16,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: CustomAppbar(),
+        title: CustomAppbar(onChanged: (value) {}, onSubmitted: (value) {}),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),

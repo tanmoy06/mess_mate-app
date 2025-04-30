@@ -12,4 +12,5 @@ class AppColors {
   static Color lightYellow = const Color(0xffFCFAF7);
   static Color nipple = const Color(0xff1c1a0d);
   static Color onboardingGrey = const Color(0xff637087);
+  static Color lightBlue = const Color(0xffd4e4ff);
 }

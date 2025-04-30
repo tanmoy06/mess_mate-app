@@ -5,7 +5,13 @@ import 'package:mess_mate/app/constants/app_text_styles.dart';
 import 'package:mess_mate/app/service/responsive_ui_service.dart';
 
 class CustomAppbar extends StatelessWidget {
-  const CustomAppbar({super.key});
+  final ValueChanged<String> onChanged;
+  final ValueChanged<String> onSubmitted;
+  const CustomAppbar({
+    super.key,
+    required this.onChanged,
+    required this.onSubmitted,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +24,9 @@ class CustomAppbar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextField(
+          onChanged: onChanged,
+          onSubmitted: onSubmitted,
+          textInputAction: TextInputAction.done,
           decoration: InputDecoration(
             hintText: AppStrings.searchLocationOrProperty,
             hintStyle: AppTextStyles.sans400(color: AppColors.textGrey),

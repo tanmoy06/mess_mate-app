@@ -9,4 +9,5 @@ class Assets {
   static const String stayComfortable = "assets/images/stayComfortable.json";
   static const String location = "assets/icons/location.png";
   static const String homePageImage = "assets/images/homePageImage.png";
+  static const String heart = "assets/icons/heart.png";
 }

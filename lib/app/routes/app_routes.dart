@@ -12,6 +12,7 @@ abstract class Routes {
   static const BOOKING = _Paths.BOOKING;
   static const ONBOARDING = _Paths.ONBOARDING;
   static const USER_HOME = _Paths.USER_HOME;
+  static const VIEW_DETAILS = _Paths.VIEW_DETAILS;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const BOOKING = '/booking';
   static const ONBOARDING = '/onboarding';
   static const USER_HOME = '/user-home';
+  static const VIEW_DETAILS = '/view-details';
 }
