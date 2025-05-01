@@ -32,7 +32,7 @@ class UserProfileView extends GetView<UserProfileController> {
                 ),
               ),
               Text(
-                'Tanmoy Sarkar',
+                'Rishikesh Saha 🙈',
                 style: AppTextStyles.sans700(
                   fontSize: 22,
                   color: AppColors.black,

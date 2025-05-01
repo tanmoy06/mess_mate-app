@@ -12,6 +12,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/map_page/bindings/map_page_binding.dart';
+import '../modules/map_page/views/map_page_view.dart';
 import '../modules/nav_bar/bindings/nav_bar_binding.dart';
 import '../modules/nav_bar/views/nav_bar_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
@@ -78,6 +80,12 @@ class AppPages {
       name: _Paths.VIEW_DETAILS,
       page: () => const ViewDetailsView(),
       binding: ViewDetailsBinding(),
+    ),
+
+    GetPage(
+      name: _Paths.MAP_PAGE,
+      page: () => const MapPageView(),
+      binding: MapPageBinding(),
     ),
   ];
 }
