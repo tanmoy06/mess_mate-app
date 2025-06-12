@@ -1,20 +1,19 @@
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 import 'package:mess_mate/app/routes/app_pages.dart';
+import 'package:mess_mate/app/service/login_service.dart';
 
 class UserProfileController extends GetxController {
-  //TODO: Implement UserProfileController
-
-  void logout() {
-    final storage = GetStorage();
-    storage.remove('accessToken');
-    storage.remove('refreshToken');
-    Get.offAllNamed(Routes.LOGIN);
-  }
+  final LoginService _loginService = Get.find<LoginService>();
 
   @override
   void onInit() {
     super.onInit();
+  }
+
+  Future<void> logout() async {
+    await _loginService.clearUserSession();
+    Get.offAllNamed(Routes.LOGIN);
   }
 
   @override

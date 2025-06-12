@@ -3,11 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:mess_mate/app/constants/app_urls.dart';
 import 'package:mess_mate/app/routes/app_pages.dart';
 import 'package:http/http.dart' as http;
+import 'package:mess_mate/app/service/login_service.dart';
 
 class LoginController extends GetxController {
+  final LoginService _loginService = Get.find<LoginService>();
   late FocusNode emailFocus;
   late FocusNode passwordFocus;
   @override
@@ -93,19 +96,53 @@ class LoginController extends GetxController {
     try {
       var response = await http.post(
         Uri.parse(AppUrls.login),
-        body: {"email": email.value, "password": password.value},
+        headers: {'Content-type': 'application/json'},
+        body: jsonEncode({"email": email.value, "password": password.value}),
       );
 
       if (response.statusCode == 200) {
         var bdy = jsonDecode(response.body);
         String message = bdy['message'];
-        String accessToken = bdy['accessToken'];
-        String refreshToken = bdy['refreshToken'];
-        if (isRememberMeChecked.value) {
-          storage.write('accessToken', accessToken);
-          storage.write('refreshToken', refreshToken);
+        String? accessToken = bdy['accessToken'];
+        String? refreshToken = bdy['refreshToken'];
+        if (accessToken != null &&
+            accessToken.isNotEmpty &&
+            refreshToken != null &&
+            refreshToken.isNotEmpty) {
+          print('Received access Token: $accessToken');
+          print('Received refresh Token: $refreshToken');
+          try {
+            Map<String, dynamic> payload = Jwt.parseJwt(accessToken);
+            final String? userId = payload['id'];
+            final String? userType = payload['type'];
+            if (userId != null && userType != null) {
+              await _loginService.saveUserSession(
+                userId: userId,
+                userType: userType,
+                jwtToken: accessToken,
+                refreshToken: refreshToken,
+              );
+              print(
+                'User session (ID, Type, Access Token) saved securely via LoginService.',
+              );
+            } else {
+              print(
+                'Error: User ID or Type is null after decoding JWT. Session not saved.',
+              );
+            }
+          } catch (e) {
+            print('Error decoding JWT token: $e');
+            Get.snackbar(
+              'Login Error',
+              'Failed to decode authentication token.',
+            );
+          }
         }
 
+        // if (isRememberMeChecked.value) {
+        //   // storage.write('accessToken', accessToken);
+        //   storage.write('refreshToken', refreshToken);
+        // }
         Get.snackbar('Success', message);
         Get.offAllNamed(Routes.NAV_BAR);
       } else {

@@ -7,18 +7,22 @@ import 'package:mess_mate/app/service/responsive_ui_service.dart';
 
 class MessCard extends StatelessWidget {
   final String imageUrl;
-  final String name;
-  final String location;
+  final String messName;
+  final String address;
   final List<String> services;
   final double price;
+  final VoidCallback onViewDetails;
+  final VoidCallback onBookNow;
 
   const MessCard({
     super.key,
     required this.imageUrl,
-    required this.name,
-    required this.location,
+    required this.messName,
+    required this.address,
     required this.services,
     required this.price,
+    required this.onViewDetails,
+    required this.onBookNow,
   });
 
   @override
@@ -35,7 +39,7 @@ class MessCard extends StatelessWidget {
               imageUrl,
               height: 140.kh,
               width: 100.w,
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
             ),
           ),
           Padding(
@@ -47,7 +51,7 @@ class MessCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      name,
+                      messName,
                       style: AppTextStyles.sans700(
                         color: AppColors.black,
                         fontSize: 14,
@@ -63,7 +67,7 @@ class MessCard extends StatelessWidget {
                     4.kwidthBox,
                     Expanded(
                       child: Text(
-                        location,
+                        address,
                         style: AppTextStyles.sans400(
                           color: AppColors.textGrey,
                           fontSize: 12,
@@ -112,7 +116,7 @@ class MessCard extends StatelessWidget {
                         buttonText: AppStrings.viewDetails,
                         height: 44.kh,
                         width: 100.kw,
-                        onPressed: () {},
+                        onPressed: onViewDetails,
                       ),
                     ),
                     8.kwidthBox,
@@ -126,7 +130,7 @@ class MessCard extends StatelessWidget {
                         buttonText: AppStrings.bookNow,
                         height: 44.kh,
                         width: 100.kw,
-                        onPressed: () {},
+                        onPressed: onBookNow,
                       ),
                     ),
                   ],

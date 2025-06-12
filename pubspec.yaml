@@ -41,6 +41,9 @@ dependencies:
   geolocator: ^14.0.0
   flutter_map: ^8.1.1
   latlong2: ^0.9.1
+  jwt_decode: ^0.3.1
+  flutter_secure_storage: ^9.2.4
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
