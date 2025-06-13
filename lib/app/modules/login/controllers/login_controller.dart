@@ -7,6 +7,7 @@ import 'package:jwt_decode/jwt_decode.dart';
 import 'package:mess_mate/app/constants/app_urls.dart';
 import 'package:mess_mate/app/routes/app_pages.dart';
 import 'package:http/http.dart' as http;
+import 'package:mess_mate/app/service/device_info_service.dart';
 import 'package:mess_mate/app/service/login_service.dart';
 
 class LoginController extends GetxController {
@@ -93,10 +94,15 @@ class LoginController extends GetxController {
     }
 
     isLoading.value = true;
+    final deviceService = Get.find<DeviceInfoService>();
+    final deviceInfo = await deviceService.getDeviceInfo();
     try {
       var response = await http.post(
         Uri.parse(AppUrls.login),
-        headers: {'Content-type': 'application/json'},
+        headers: {
+          'Content-type': 'application/json',
+          'x-device-info': jsonEncode(deviceInfo),
+        },
         body: jsonEncode({"email": email.value, "password": password.value}),
       );
 

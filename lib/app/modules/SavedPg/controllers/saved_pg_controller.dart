@@ -26,24 +26,9 @@ class SavedPgController extends GetxController {
         );
         return;
       }
-      http.Response response = await ApiProvider.get(AppUrls.getSavedMess);
-      if (response.statusCode == 401 || response.statusCode == 403) {
-        final success = await AuthService().refreshAccessToken();
-        if (success) {
-          jwtToken = await _loginService.getJwtToken();
-          response = await ApiProvider.get(AppUrls.getSavedMess);
-        } else {
-          Get.snackbar(
-            'Session Expired',
-            'Please log in again.',
-            snackPosition: SnackPosition.BOTTOM,
-          );
-          await _loginService.clearUserSession();
-          // Optional redirect:
-          // Get.offAllNamed(Routes.LOGIN);
-          return;
-        }
-      }
+      http.Response response = await ApiProvider.getWithAuth(
+        AppUrls.getSavedMess,
+      );
       if (response.statusCode == 200) {
         try {
           final List<dynamic> savedMess = jsonDecode(response.body);
@@ -68,8 +53,8 @@ class SavedPgController extends GetxController {
     }
   }
 
-  Future<void> _checkAuthStatus() async {
-    await AuthService().refreshAccessToken();
+  static Future<void> _checkAuthStatus() async {
+    await AuthService.refreshAccessToken();
   }
 
   @override
