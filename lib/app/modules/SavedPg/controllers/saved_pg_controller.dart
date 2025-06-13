@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:mess_mate/app/constants/app_urls.dart';
 import 'package:mess_mate/app/data/provider/api_provider.dart';
 import 'package:mess_mate/app/models/messModel.dart';
-import 'package:mess_mate/app/service/auth_service.dart';
 import 'package:mess_mate/app/service/login_service.dart';
 
 class SavedPgController extends GetxController {
@@ -53,13 +52,8 @@ class SavedPgController extends GetxController {
     }
   }
 
-  static Future<void> _checkAuthStatus() async {
-    await AuthService.refreshAccessToken();
-  }
-
   @override
   void onInit() {
-    _checkAuthStatus();
     _fetchSavedMess();
     super.onInit();
   }

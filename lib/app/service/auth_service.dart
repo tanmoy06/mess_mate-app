@@ -24,6 +24,7 @@ class AuthService {
 
   static Future<bool> refreshAccessToken() async {
     final refreshToken = await LoginService().getRefreshToken();
+    print('token from refressAccessToken function: $refreshToken');
     if (refreshToken == null || refreshToken.isEmpty) {
       return false;
     }
@@ -38,14 +39,15 @@ class AuthService {
         'x-device-info': jsonEncode(deviceInfo),
       },
     );
-
+    // need to fix this part of code-------------------------------------------------
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      final newAccessToken = data['newAccessToken'];
+      final newAccessToken = data['accessToken'];
       final newRefreshToken = data['newRefreshToken'];
       if (newAccessToken == null) {
         throw Exception('New Access token missing in response');
       }
+      print(newAccessToken);
       await LoginService().updateJwtToken(newAccessToken);
       if (newRefreshToken != null) {
         await LoginService().updateRefreshToken(newRefreshToken);
@@ -56,5 +58,6 @@ class AuthService {
       print('Refresh token response: ${response.statusCode} ${response.body}');
       return false;
     }
+    // -----------------------------------------------------------------------
   }
 }

@@ -98,7 +98,7 @@ class LoginController extends GetxController {
     final deviceInfo = await deviceService.getDeviceInfo();
     try {
       var response = await http.post(
-        Uri.parse(AppUrls.login),
+        Uri.parse(AppUrls.loginUser),
         headers: {
           'Content-type': 'application/json',
           'x-device-info': jsonEncode(deviceInfo),

@@ -44,6 +44,12 @@ class SavedPgView extends GetView<SavedPgController> {
                       'rating': 4.5,
                       'review': 120,
                       'price': 1200.0,
+                      'location': mess.location,
+                      'address': mess.address,
+                      'aboutMess': mess.aboutMess,
+                      'geoHash': mess.geoHash,
+                      'mobileNo': mess.mobileNo,
+                      '_id': mess.id,
                     },
                   );
                 },

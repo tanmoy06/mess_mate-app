@@ -70,7 +70,7 @@ class UserHomeController extends GetxController {
           userFirstName.value = responseData['firstName'];
           userLastName.value = responseData['lastName'];
           userEmail.value = responseData['email'];
-          print(userDetails);
+          // print(userDetails);
         } on FormatException catch (e) {
           Get.snackbar('JSON parsing error', e.message);
           throw Exception(

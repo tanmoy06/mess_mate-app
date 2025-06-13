@@ -17,7 +17,7 @@ class ApiProvider {
   static Future<http.Response> getWithoutAuth(String endpoint) async {
     try {
       final response = await http.get(
-        Uri.parse('$_baseUrl/$endpoint'),
+        Uri.parse('$_baseUrl$endpoint'),
         headers: {'Content-Type': 'application/json'},
       );
       return response;

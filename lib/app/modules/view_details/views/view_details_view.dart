@@ -142,7 +142,7 @@ class ViewDetailsView extends GetView<ViewDetailsController> {
                     ),
                     5.kheightBox,
                     Text(
-                      'Sector 5, Salt Lake, Kolkata- 700023',
+                      controller.address,
                       style: AppTextStyles.sans400(
                         fontSize: 12,
                         color: AppColors.black,
