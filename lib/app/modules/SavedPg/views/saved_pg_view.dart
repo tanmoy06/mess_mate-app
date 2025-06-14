@@ -30,11 +30,11 @@ class SavedPgView extends GetView<SavedPgController> {
             return Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 15),
               child: MessCard(
-                imageUrl: mess.profilePhoto,
-                messName: mess.messName,
-                address: mess.address,
-                services: ['Food', 'RO Water'],
-                price: 1200,
+                imageUrl: mess.profilePhoto ?? '',
+                messName: mess.messName ?? '',
+                address: mess.address ?? '',
+                services: mess.facility,
+                price: mess.roomInfo.first.pricePerHead.toDouble(),
                 onViewDetails: () {
                   Get.toNamed(
                     Routes.VIEW_DETAILS,
@@ -47,7 +47,7 @@ class SavedPgView extends GetView<SavedPgController> {
                       'location': mess.location,
                       'address': mess.address,
                       'aboutMess': mess.aboutMess,
-                      'geoHash': mess.geoHash,
+                      'geoHash': mess.location?.geoHash,
                       'mobileNo': mess.mobileNo,
                       '_id': mess.id,
                     },

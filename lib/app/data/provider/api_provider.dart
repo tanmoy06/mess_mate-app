@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:mess_mate/app/constants/app_urls.dart';
 import 'package:mess_mate/app/service/auth_service.dart';
+import 'package:mess_mate/app/service/device_info_service.dart';
 import 'package:mess_mate/app/service/login_service.dart';
 
 class ApiProvider {
@@ -15,10 +17,17 @@ class ApiProvider {
   }
 
   static Future<http.Response> getWithoutAuth(String endpoint) async {
+    final deviceService = Get.find<DeviceInfoService>();
+    final deviceInfo = await deviceService.getNormalizedDeviceInfo();
     try {
       final response = await http.get(
         Uri.parse('$_baseUrl$endpoint'),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'User-Agent': 'PostmanRuntime/7.32.3',
+          'x-device-info': deviceInfo,
+        },
       );
       return response;
     } catch (e) {
@@ -55,10 +64,15 @@ class ApiProvider {
   }
 
   static Future<Map<String, String>> _authHeaders() async {
+    final deviceService = Get.find<DeviceInfoService>();
+    final deviceInfo = await deviceService.getNormalizedDeviceInfo();
     final token = await LoginService().getJwtToken();
     return {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'User-Agent': 'PostmanRuntime/7.32.3',
+      'x-device-info': deviceInfo,
     };
   }
 }

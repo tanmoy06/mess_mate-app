@@ -1,16 +1,17 @@
 import 'dart:convert';
 
+// import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:mess_mate/app/constants/app_urls.dart';
 import 'package:mess_mate/app/data/provider/api_provider.dart';
-import 'package:mess_mate/app/models/messModel.dart';
+import 'package:mess_mate/app/models/pg_owner_model.dart';
 import 'package:mess_mate/app/service/login_service.dart';
 
 class SavedPgController extends GetxController {
   final LoginService _loginService = Get.find<LoginService>();
   final RxBool isLoading = false.obs;
-  var messList = <MessUserModel>[].obs;
+  var messList = <PgOwnerModel>[].obs;
 
   Future<void> _fetchSavedMess() async {
     isLoading.value = true;
@@ -29,16 +30,14 @@ class SavedPgController extends GetxController {
         AppUrls.getSavedMess,
       );
       if (response.statusCode == 200) {
+        // debugPrint(jsonEncode(jsonDecode(response.body)), wrapWidth: 1024);
         try {
           final List<dynamic> savedMess = jsonDecode(response.body);
-          for (var mess in savedMess) {
-            print(mess); // each `mess` is a Map<String, dynamic>
-          }
           final data =
               savedMess
                   .map(
                     (item) =>
-                        MessUserModel.fromJson(item as Map<String, dynamic>),
+                        PgOwnerModel.fromJson(item as Map<String, dynamic>),
                   )
                   .toList();
           messList.value = data;
