@@ -30,19 +30,19 @@ class AuthService {
     }
     final url = Uri.parse(AppUrls.refreshTokenHandler);
     final deviceService = Get.find<DeviceInfoService>();
-    final deviceInfo = await deviceService.getDeviceInfo();
+    final deviceInfo = await deviceService.getNormalizedDeviceInfo();
     final response = await http.post(
       url,
       headers: {
         'Authorization': 'Bearer $refreshToken',
         'Content-Type': 'application/json',
-        'x-device-info': jsonEncode(deviceInfo),
+        'x-device-info': deviceInfo,
       },
     );
-    // need to fix this part of code-------------------------------------------------
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      final newAccessToken = data['accessToken'];
+      print(data);
+      final newAccessToken = data['newAccessToken'];
       final newRefreshToken = data['newRefreshToken'];
       if (newAccessToken == null) {
         throw Exception('New Access token missing in response');
@@ -58,6 +58,5 @@ class AuthService {
       print('Refresh token response: ${response.statusCode} ${response.body}');
       return false;
     }
-    // -----------------------------------------------------------------------
   }
 }

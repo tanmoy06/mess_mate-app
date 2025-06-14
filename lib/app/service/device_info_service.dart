@@ -8,7 +8,7 @@ class DeviceInfoService {
 
   final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
 
-  Future<Map<String, dynamic>> getDeviceInfo() async {
+  Future<Map<String, dynamic>> getDeviceInfoMap() async {
     try {
       if (Platform.isAndroid) {
         final androidInfo = await _deviceInfoPlugin.androidInfo;
@@ -33,5 +33,16 @@ class DeviceInfoService {
     } catch (e) {
       return {'device': 'Error', 'message': e.toString()};
     }
+  }
+
+  Future<String> getNormalizedDeviceInfo() async {
+    final infoMap = await getDeviceInfoMap();
+
+    final device = infoMap['device'] ?? 'Unknown';
+    final manufacturer = infoMap['manufacturer'] ?? 'Unknown';
+    final model = infoMap['model'] ?? 'Unknown';
+    final version = infoMap['version'] ?? 'Unknown';
+
+    return '$device-$manufacturer-$model-$version';
   }
 }

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/response/response.dart' as http;
 import 'package:mess_mate/app/constants/app_urls.dart';
 import 'package:mess_mate/app/data/provider/api_provider.dart';
-import 'package:mess_mate/app/models/messModel.dart';
+// import 'package:mess_mate/app/models/messModel.dart';
+import 'package:mess_mate/app/models/pg_owner_model.dart';
 
 class ViewDetailsController extends GetxController {
   late final String imageUrl;
@@ -16,7 +16,8 @@ class ViewDetailsController extends GetxController {
   late final String geoHash;
   late final String mobileNo;
   late final String id;
-  late final Location location;
+  // late final Location location;
+  var messDetails = <PgOwnerModel>[].obs;
 
   final List<Map<String, dynamic>> ratings = const [
     {'stars': 5, 'percent': 40},
@@ -36,7 +37,7 @@ class ViewDetailsController extends GetxController {
     price = args['price'];
     address = args['address'];
     geoHash = args["geoHash"];
-    location = args["location"];
+    // location = args["location"];
     mobileNo = args["mobileNo"];
     id = args['_id'];
     super.onInit();
@@ -47,8 +48,9 @@ class ViewDetailsController extends GetxController {
       final messDetailsUrl = '${AppUrls.viewDetails}/$id';
       final response = await ApiProvider.getWithoutAuth(messDetailsUrl);
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        print('Mess Data: ${data['data']}');
+        final decode = jsonDecode(response.body);
+        final PgOwnerModel data = PgOwnerModel.fromJson(decode['data']);
+        messDetails.value = [data];
       } else if (response.statusCode == 404) {
         print('Mess not found');
       } else {

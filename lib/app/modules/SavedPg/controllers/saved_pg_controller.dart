@@ -31,6 +31,9 @@ class SavedPgController extends GetxController {
       if (response.statusCode == 200) {
         try {
           final List<dynamic> savedMess = jsonDecode(response.body);
+          for (var mess in savedMess) {
+            print(mess); // each `mess` is a Map<String, dynamic>
+          }
           final data =
               savedMess
                   .map(

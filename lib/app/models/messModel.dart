@@ -33,7 +33,7 @@ class MessUserModel {
 
   factory MessUserModel.fromJson(Map<String, dynamic> json) {
     return MessUserModel(
-      id: json['id'] ?? '',
+      id: json['_id'] ?? '',
       firstName: json['firstName'] ?? '',
       lastName: json['lastName'] ?? '',
       email: json['email'] ?? '',

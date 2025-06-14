@@ -95,13 +95,13 @@ class LoginController extends GetxController {
 
     isLoading.value = true;
     final deviceService = Get.find<DeviceInfoService>();
-    final deviceInfo = await deviceService.getDeviceInfo();
+    final deviceInfo = await deviceService.getNormalizedDeviceInfo();
     try {
       var response = await http.post(
         Uri.parse(AppUrls.loginUser),
         headers: {
           'Content-type': 'application/json',
-          'x-device-info': jsonEncode(deviceInfo),
+          'x-device-info': deviceInfo,
         },
         body: jsonEncode({"email": email.value, "password": password.value}),
       );
