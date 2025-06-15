@@ -121,17 +121,20 @@ class UserHomeView extends GetView<UserHomeController> {
                         ],
                       ),
                       Obx(() {
-                        if (controller.messList.isEmpty) {
-                          // return Center(
-                          //   child: Text(
-                          //     'No nearby property available',
-                          //     style: AppTextStyles.sans700(
-                          //       color: AppColors.borderGrey,
-                          //       fontSize: 18,
-                          //     ),
-                          //   ),
-                          // );
+                        if (controller.messList.isEmpty &&
+                            controller.isLoadingNearbyMess.value == true) {
                           return FeaturedPropertySkeleton();
+                        } else if (controller.messList.isEmpty &&
+                            controller.isLoadingNearbyMess.value == false) {
+                          return Center(
+                            child: Text(
+                              'No nearby property available',
+                              style: AppTextStyles.sans700(
+                                color: AppColors.borderGrey,
+                                fontSize: 18,
+                              ),
+                            ),
+                          );
                         }
                         return SizedBox(
                           height: 222.kh,
