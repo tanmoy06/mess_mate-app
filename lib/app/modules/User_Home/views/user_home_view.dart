@@ -9,6 +9,7 @@ import 'package:mess_mate/app/constants/app_text_styles.dart';
 import 'package:mess_mate/app/constants/assets.dart';
 import 'package:mess_mate/app/routes/app_pages.dart';
 import 'package:mess_mate/app/service/responsive_ui_service.dart';
+import 'package:mess_mate/app/shimmer/featured_property_skeleton.dart';
 
 import '../controllers/user_home_controller.dart';
 
@@ -99,7 +100,7 @@ class UserHomeView extends GetView<UserHomeController> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            'Featured Properties',
+                            'Nearby Properties',
                             style: AppTextStyles.sans700(
                               fontSize: 16,
                               color: AppColors.black,
@@ -119,43 +120,68 @@ class UserHomeView extends GetView<UserHomeController> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 222.kh,
-                        width: 100.w,
-                        child: GridView.builder(
-                          itemCount: controller.featuredData.length,
-                          scrollDirection: Axis.horizontal,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1,
-                                mainAxisSpacing: 0,
-                              ),
-                          itemBuilder: (context, index) {
-                            final item = controller.featuredData[index];
-                            return GestureDetector(
-                              onTap: () {
-                                Get.toNamed(
-                                  Routes.VIEW_DETAILS,
-                                  arguments: {
-                                    'imageUrl': item['imageUrl'],
-                                    'messName': item['messName'],
-                                    'rating': item['rating'],
-                                    'review': item['review'],
-                                    'price': item['price'],
-                                  },
-                                );
-                              },
-                              child: FeaturedProperties(
-                                imageUrl: item['imageUrl'],
-                                messName: item['messName'],
-                                rating: item['rating'],
-                                review: item['review'],
-                                price: item['price'],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
+                      Obx(() {
+                        if (controller.messList.isEmpty) {
+                          // return Center(
+                          //   child: Text(
+                          //     'No nearby property available',
+                          //     style: AppTextStyles.sans700(
+                          //       color: AppColors.borderGrey,
+                          //       fontSize: 18,
+                          //     ),
+                          //   ),
+                          // );
+                          return FeaturedPropertySkeleton();
+                        }
+                        return SizedBox(
+                          height: 222.kh,
+                          width: 100.w,
+                          child: GridView.builder(
+                            itemCount: controller.messList.length,
+                            scrollDirection: Axis.horizontal,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1,
+                                  mainAxisSpacing: 0,
+                                ),
+                            itemBuilder: (context, index) {
+                              final mess = controller.messList[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(
+                                    Routes.VIEW_DETAILS,
+                                    arguments: {
+                                      'imageUrl': mess.profilePhoto,
+                                      'messName': mess.messName,
+                                      'rating': 4.5,
+                                      'review': 120,
+                                      'price': 1200.0,
+                                      'location': mess.location,
+                                      'address': mess.address,
+                                      'aboutMess': mess.aboutMess,
+                                      'geoHash': mess.location?.geoHash,
+                                      'mobileNo': mess.mobileNo,
+                                      '_id': mess.id,
+                                    },
+                                  );
+                                },
+                                child:
+                                    controller.isLoadingNearbyMess.value
+                                        ? FeaturedPropertySkeleton()
+                                        : FeaturedProperties(
+                                          imageUrl: mess.profilePhoto ?? '',
+                                          messName: mess.messName ?? '',
+                                          gender: mess.gender,
+                                          price:
+                                              mess.roomInfo.first.pricePerHead
+                                                  .toDouble(),
+                                        ),
+                              );
+                            },
+                          ),
+                        );
+                      }),
+
                       10.kheightBox,
                       Text(
                         'Explore popular cities',

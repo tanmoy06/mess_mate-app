@@ -5,6 +5,8 @@ import 'package:mess_mate/app/constants/app_colors.dart';
 import 'package:mess_mate/app/constants/app_text_styles.dart';
 import 'package:mess_mate/app/components/mess_card.dart';
 import 'package:mess_mate/app/routes/app_pages.dart';
+import 'package:mess_mate/app/service/responsive_ui_service.dart';
+import 'package:mess_mate/app/shimmer/mess_card_skeleton.dart';
 import '../controllers/saved_pg_controller.dart';
 
 class SavedPgView extends GetView<SavedPgController> {
@@ -21,7 +23,18 @@ class SavedPgView extends GetView<SavedPgController> {
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
+          return Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 15),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  MessCardSkeleton(),
+                  10.kheightBox,
+                  MessCardSkeleton(),
+                ],
+              ),
+            ),
+          );
         }
         return ListView.builder(
           itemCount: controller.messList.length,

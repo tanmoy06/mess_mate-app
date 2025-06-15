@@ -6,4 +6,5 @@ class AppUrls {
   static String saveMess = "$baseUrl/auth/likedMess";
   static String getSavedMess = "/auth/getLikedMess";
   static String refreshTokenHandler = "$baseUrl/auth/refresh-token";
+  static String findMessUrl = '$baseUrl/auth/findMess';
 }
